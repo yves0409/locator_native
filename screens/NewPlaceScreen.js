@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   View,
   StyleSheet,
@@ -8,9 +9,11 @@ import {
   Button,
 } from "react-native";
 import Colors from "../constants/Colors";
+import * as placesActions from "../store/places-actions";
 
 const NewPlaceScreen = () => {
   const [titleValue, setTitleValue] = useState("");
+  const dispatch = useDispatch();
 
   //getting the userinput
   const titleChangeHandler = (text) => {
@@ -19,7 +22,10 @@ const NewPlaceScreen = () => {
   };
 
   //save the userinput
-  const savePlaceHandler = () => {};
+  const savePlaceHandler = () => {
+    dispatch(placeActions.addPlace(titleValue));
+    props.navigation.goBack();
+  };
 
   return (
     <ScrollView>
@@ -33,7 +39,7 @@ const NewPlaceScreen = () => {
         <Button
           title="Save Location"
           color={Colors.primary}
-          onPress={() => {}}
+          onPress={savePlaceHandler}
         />
       </View>
     </ScrollView>
