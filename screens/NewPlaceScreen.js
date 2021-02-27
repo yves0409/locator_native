@@ -11,7 +11,7 @@ import {
 import Colors from "../constants/Colors";
 import * as placesActions from "../store/places-actions";
 
-const NewPlaceScreen = () => {
+const NewPlaceScreen = (props) => {
   const [titleValue, setTitleValue] = useState("");
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const NewPlaceScreen = () => {
 
   //save the userinput
   const savePlaceHandler = () => {
-    dispatch(placeActions.addPlace(titleValue));
+    dispatch(placesActions.addPlace(titleValue));
     props.navigation.goBack();
   };
 
