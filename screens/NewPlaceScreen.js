@@ -9,6 +9,23 @@ const NewPlaceScreen = () => {
   );
 };
 
+NewPlaceScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "New Place",
+    //   headerRight: () => (
+    //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //       <Item
+    //         title="AddPlace"
+    //         iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
+    //         onPress={() => {
+    //           navData.navigation.navigate("NewPlace");
+    //         }}
+    //       />
+    //     </HeaderButtons>
+    //   ),
+  };
+};
+
 const styles = StyleSheet.create({});
 
 export default NewPlaceScreen;
