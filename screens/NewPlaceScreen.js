@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Colors from "../constants/Colors";
 import * as placesActions from "../store/places-actions";
+import ImagePicker from "../components/ImagePicker";
 
 const NewPlaceScreen = (props) => {
   const [titleValue, setTitleValue] = useState("");
@@ -36,6 +37,7 @@ const NewPlaceScreen = (props) => {
           value={titleValue}
           onChangeText={titleChangeHandler}
         />
+        <ImagePicker />
         <Button
           title="Save Location"
           color={Colors.primary}
@@ -46,20 +48,10 @@ const NewPlaceScreen = (props) => {
   );
 };
 
+//Setting the title
 NewPlaceScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "New Place",
-    //   headerRight: () => (
-    //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
-    //       <Item
-    //         title="AddPlace"
-    //         iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
-    //         onPress={() => {
-    //           navData.navigation.navigate("NewPlace");
-    //         }}
-    //       />
-    //     </HeaderButtons>
-    //   ),
   };
 };
 
