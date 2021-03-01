@@ -26,7 +26,7 @@ const MapScreen = (props) => {
       lat: event.nativeEvent.coordinate.latitude,
       lng: event.nativeEvent.coordinate.longitude,
     });
-    console.log(event);
+    //console.log(event);
   };
 
   const savePickedLocationHandler = useCallback(() => {
