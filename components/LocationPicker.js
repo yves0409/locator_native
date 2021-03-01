@@ -10,10 +10,11 @@ import {
 import Colors from "../constants/Colors";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
+import MapPreview from "./MapPreview";
 
 const LocationPicker = (props) => {
+  const [isFetching, setIsFetching] = useState(false);
   const [pickedLocation, setPickedLocation] = useState();
-  const [isFetching, setIsFetching] = useState();
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -30,7 +31,7 @@ const LocationPicker = (props) => {
 
   const getLocationHandler = async () => {
     const hasPermission = await verifyPermissions();
-    if (hasPermission) {
+    if (!hasPermission) {
       return;
     }
 
@@ -56,13 +57,13 @@ const LocationPicker = (props) => {
 
   return (
     <View style={styles.locationPicker}>
-      <View style={styles.mapPreview}>
+      <MapPreview style={styles.mapPreview} location={pickedLocation}>
         {isFetching ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : (
           <Text>No Location Yet</Text>
         )}
-      </View>
+      </MapPreview>
       <Button
         title="Get Location"
         color={Colors.primary}
