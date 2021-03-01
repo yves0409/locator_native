@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { StyleSheet, Text, TouchableOpacity, Platform } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import Colors from "../constants/Colors";
 
 const MapScreen = (props) => {
   const [selectedLocation, setSelectedLocation] = useState();
@@ -28,6 +29,17 @@ const MapScreen = (props) => {
     console.log(event);
   };
 
+  const savePickedLocationHandler = useCallback(() => {
+    if (!selectedLocation) {
+      return;
+    }
+    props.navigation.navigate("NewPlace", { pickedLocation: selectedLocation });
+  }, [selectedLocation]);
+
+  useEffect(() => {
+    props.navigation.setParams({ saveLocation: savePickedLocationHandler });
+  }, [savePickedLocationHandler]);
+
   return (
     <MapView
       style={styles.map}
@@ -41,9 +53,27 @@ const MapScreen = (props) => {
   );
 };
 
+MapScreen.navigationOptions = (navData) => {
+  const saveFn = navData.navigation.getParam("saveLocation");
+  return {
+    headerRight: () => (
+      <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
+        <Text style={styles.headerButtonText}>Save</Text>
+      </TouchableOpacity>
+    ),
+  };
+};
+
 const styles = StyleSheet.create({
   map: {
     flex: 1,
+  },
+  headerButton: {
+    marginHorizontal: 20,
+  },
+  headerButtonText: {
+    fontSize: 16,
+    color: Platform.OS === "android" ? "White" : Colors.primary,
   },
 });
 
