@@ -8,8 +8,8 @@ const MapPreview = (props) => {
 
   if (props.location) {
     imagePreviewUrl = `https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=400&height=200&center=lonlat:${props.location.lng},${props.location.lat}&zoom=14&apiKey=${ENV.geoKey}`;
-    console.log(props.location.lat);
-    console.log(props.location.lng);
+    //console.log(props.location.lat);
+    //console.log(props.location.lng);
   }
 
   return (
